@@ -8,7 +8,7 @@ public class teki1 : MonoBehaviour
     float fallspeed;
     float rotspeed; //動かす関係の変数値を作成
     int Type = 0;   //敵の動きのタイプを決める
-    bool UpDownPoint = false;//アップのときのモーションはtrue ダウンのときのモーションはfalse
+    bool UpDownPoint = false;//アップのときのモーションはtrueダウンのときのモーションはfalse
     int jyougeMAX;
 
     float modoriTime;    //戻る距離
@@ -24,7 +24,7 @@ public class teki1 : MonoBehaviour
         //this.rotspeed = 5f + 3F * Random.value;         //スクリプトが生成されたときにランダムな速度・回転で飛んでくるように乱数を割り当てる
 
         //gameObject.tag = "teki";    //タグを指定する
-        Type = Random.Range(1, 4);//1-3までのタイプをランダムで決める
+        Type = Random.Range(1, 4);//1～3までのタイプをランダムで決める
         Ypoition = 0;
         jyougeMAX = Random.Range(150, 500);
 
@@ -36,6 +36,7 @@ public class teki1 : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //敵のタイプごとの違う処理をさせる
         if (Type == 1)//直線型
         {
             transform.Translate(-fallspeed, 0, 0, Space.World);     //動かす処理(Y座標の場所をランダムで出現させるのはPrefab側で処理をしている)
@@ -102,7 +103,6 @@ public class teki1 : MonoBehaviour
                 else
                 {
                     modori = true;//戻りの時間が終了したら同じ作業ができいようにする
-                    //Debug.Log("もどりしゅr帳");
                 }
             }
             else
@@ -116,7 +116,7 @@ public class teki1 : MonoBehaviour
         }
         
 
-        if (transform.localEulerAngles.z <= 0)  //敵キャラに僅かなアニメーションを付けていみる
+        if (transform.localEulerAngles.z <= 0)  //敵キャラに僅かなアニメーションを付けている処理
         {
             transform.Rotate(0, 0, -5f);
         }

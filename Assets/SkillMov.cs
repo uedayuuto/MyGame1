@@ -13,7 +13,7 @@ public class SkillMov : MonoBehaviour
     public GameObject Player;
     public GameObject PlayerHP;
 
-    public GameObject SkillGuide;//sukirugagagagadgfaikfaik
+    public GameObject SkillGuide;
 
     public int Randomsuuji = 1;
     public int SkillName;           //スキルの種類を判別すための処理
@@ -61,7 +61,6 @@ public class SkillMov : MonoBehaviour
     public void fall()
     {
 
-        //CancelInvoke(); //タイマーを止める（スロットが止まる）
         Debug.Log("スロットは止まったよ");
         //タイマーが止まったあとの処理
         Roulette = false;
@@ -69,13 +68,13 @@ public class SkillMov : MonoBehaviour
         if (SkillName == 1)
         {
             Debug.Log("貫通スキルの発動");
-            tamauti.GetComponent<tamauti>().tamakantuuSkill();//たまを貫通させる処理をさせる
+            tamauti.GetComponent<tamauti>().tamakantuuSkill();//弾を貫通させるスキル発動
             SkillGuide.GetComponent<SkillGuide>().Skill1();//
         }
         else if (SkillName == 2)
         {
             Debug.Log("複製スキル");
-            Player.GetComponent<Player>().tamazousyoku();//たま増殖のスキル発動
+            Player.GetComponent<Player>().tamazousyoku();//弾増殖のスキル発動
             SkillGuide.GetComponent<SkillGuide>().Skill2();
         }
         else if (SkillName == 3)
@@ -85,14 +84,14 @@ public class SkillMov : MonoBehaviour
             SkillGuide.GetComponent<SkillGuide>().Skill3();
         }
         
-        Invoke("owari", 1);//１秒後に消す処理
+        Invoke("owari", 1);//１秒後にルーレットのストックを全部使い切ったか判断する処理へ
 
     }
     public void owari()
     {
         if (Skillnokori > 0)//スキル処理がすべて終わって居ないときは変数を１引いてもう一度回す処理
         {
-            Skillnokori -= 1;
+            Skillnokori -= 1;//スキルのストックを１引く（0になったら終了falseへ）
 
             Roulette = true;
             Invoke("fall", Random.Range(3f, 6f));
@@ -108,8 +107,6 @@ public class SkillMov : MonoBehaviour
 
     void SkillRoulette()//ルーレットの中身
     {
-        //Randomsuuji = Random.Range(1, 3);
-        //Debug.Log("ugogogo" + Randomsuuji);
         if (Roulette == true)
         {
             if (Randomsuuji == 3)//3の画像表示
@@ -129,7 +126,7 @@ public class SkillMov : MonoBehaviour
             }
 
             Randomsuuji++;//見せる値を１増やす
-            if (Randomsuuji > 3) Randomsuuji = 1;//３を超えた場合に１に戻す処理
+            if (Randomsuuji > 3) Randomsuuji = 1;//３を超えた場合に１に戻す処理（バグ対策用）
         }
     }
 

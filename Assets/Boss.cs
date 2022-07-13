@@ -5,8 +5,8 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     public GameObject BossHP;//ボスのHPバー
-    public GameObject BossLabel;//ボスのラベルだお
-    public GameObject explosionPrefab;//爆発のエフェクトだ
+    public GameObject BossLabel;//ボスのラベル
+    public GameObject explosionPrefab;//爆発のエフェクト
 
     bool ugoki;
 
@@ -25,7 +25,7 @@ public class Boss : MonoBehaviour
         mati = false;
         ugoki = false;
         //Bosstoujyou();      //デバック用　即ボス出現
-        Invoke("Bosstoujyou", Random.Range(60f, 90f));     //1分から1分半のまったあとにボスキャラが出る
+        Invoke("Bosstoujyou", Random.Range(60f, 90f));     //およそ1分から1分半の待った後にボスキャラが出る
         //Debug.Log("MyName：" + this.gameObject.name);
         UDsyori = true;//trueは上に行く　falseは下に行く
         modori = false;//０にするための処理
@@ -36,13 +36,13 @@ public class Boss : MonoBehaviour
         gameObject.SetActive(true);//見えるようにする
         ugoki = true;
         BossHP.GetComponent<BossHP>().HPhyouji();   //BossHPを表示させる
-        BossLabel.GetComponent<BossLabelText>().LabelHyouji();//bosuno Label wodasuyo!
+        BossLabel.GetComponent<BossLabelText>().LabelHyouji();//ボスのラベルを出す!
     }
     public void BossOwari()//ボス削除
     {
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);//自分の座標の爆破のアレが表示される
         ugoki = false;
-        gameObject.SetActive(false);//BOssを隠す処理
+        gameObject.SetActive(false);//ボスを隠す処理
         BossLabel.GetComponent<BossLabelText>().LabelKesu();
     }
 
@@ -64,7 +64,6 @@ public class Boss : MonoBehaviour
                     if (UpDownMove >= 200)
                     {
                         modori = true;//戻り処理の発動！
-                                      //UpDownMove = 0;//0にもどす動作必須ｄｆひおあｆｙひおあ
                         UDsyori = false;
                         mati = true;
                         Invoke("uesitamati", Random.Range(0f, 3f));
@@ -79,7 +78,6 @@ public class Boss : MonoBehaviour
                     if (UpDownMove <= -200)
                     {
                         modori = true;//戻り処理の発動！
-                                      //UpDownMove = 0;
                         UDsyori = true;
                         mati = true;
                         Invoke("uesitamati", Random.Range(0f, 3f));

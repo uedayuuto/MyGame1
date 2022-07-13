@@ -23,7 +23,7 @@ public class tamauti : MonoBehaviour
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();//音をあれこれする処理
+        audioSource = GetComponent<AudioSource>();//音を流す処理をする
         if (tamakantuu == true)//貫通する場合のたまのテクスチャ
         {
             spriteRenderer.sprite = kantuuTama;
@@ -39,7 +39,7 @@ public class tamauti : MonoBehaviour
     void FixedUpdate()
     {
         
-        transform.Translate(0, -0.03f, 0);//一定の速度で動くやつ
+        transform.Translate(0, -0.03f, 0);//一定の速度で動く処理
         if (transform.position.x > 20)//画面外に行くと消す処理
         {
             Destroy(gameObject);
@@ -50,7 +50,7 @@ public class tamauti : MonoBehaviour
     {
         if (kantuumati != true) //初回falseなのでこのif処理はtrue処理を通る
         {
-            tamakantuu = true;  //たまが貫通できるようになる処理
+            tamakantuu = true;  //弾が貫通できるようになる処理
             kantuumati = true;  //待ちモードがONになる
             Invoke("SkillTime", 20);
         }
@@ -87,17 +87,11 @@ public class tamauti : MonoBehaviour
             GameObject.Find("Canvas").GetComponent<UiScript>().AddScore();  //特定の場所を指定してその中にあるAddScoreの関数を呼び出す
             GameObject.Find("PlayerSkill").GetComponent<MYSKILL>().SkillPoint();    //スキルのポイントが貯まる関数を呼び出す
 
-            //PlayerSkill.GetComponent<MYSKILL>().SkillPoint();
-            //GameObject.Find("Canvas").GetComponent<UiScript>().SkillUP();   //UIsの処理作業
-
             Destroy(coll.gameObject);   //触れた相手側のオブジェクトを削除する
 
             if (tamakantuu == false)    //たま貫通機能がOFFのときの処理
             {
                 GameObject.Find("SE").GetComponent<SE>().NomarDAME();//SEオブジェクトのSEスクリプトの中にあるNomarDAMEの関数を動かす
-                //audioSource.PlayOneShot(sound2);//通常時の効果音
-                //gameObject.SetActive(false);
-                //Invoke("tamakesu", 2);//２秒後に削除をする処理
                 Destroy(gameObject);    //自分側のオブジェクトも削除する
             }
             else
@@ -112,21 +106,15 @@ public class tamauti : MonoBehaviour
             {
                 Debug.Log("aaaaaaaaa");
                 Destroy(gameObject);
-                GameObject.Find("BossHP").GetComponent<BossHP>().KantuuAuti();    //スーパー　アウチ
+                GameObject.Find("BossHP").GetComponent<BossHP>().KantuuAuti();    //クリティカルダメージの処理を送る
             }
             else//貫通OFFの時のダメージ判定
             {
                 Destroy(gameObject);//自分のオブジェクトを削除する
+
                                     //ボスのダメージ処理をする
-                GameObject.Find("BossHP").GetComponent<BossHP>().Auti();//アウチ　の処理をするお
+                GameObject.Find("BossHP").GetComponent<BossHP>().Auti();//通常ダメージ処理を送る
             }
         }
     }
-    /*
-    public void tamakesu()
-    {
-        Destroy(gameObject);//このオブジェクトを消す処理
-    }
-    */
-
 }

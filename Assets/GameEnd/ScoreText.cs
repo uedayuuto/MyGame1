@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ScoreText : MonoBehaviour
 {
-    int s;//画面に出すスコアのがぞうぢおはいおはｓｆひおあｓｄふぃお「
+    int s;//画面に出すスコアの変数
     public Text text;
     // Start is called before the first frame update
     void Start()

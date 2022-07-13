@@ -27,7 +27,7 @@ public class SE : MonoBehaviour
     }
     public void BossDed()
     {
-        a2.PlayOneShot(sound3);//ƒNƒŠƒA
+        a2.PlayOneShot(sound3);//—¬‚µ‚Ä‚¢‚é‰¹‚ğÁ‚·
     }
 
     // Update is called once per frame
